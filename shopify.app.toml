@@ -1,0 +1,49 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "86f3eea171e0dcee974e571579c857a3"
+name = "ethical-valuation-app"
+handle = "ethical-valuation-app-10"
+application_url = "https://pct-alternate-fighter-convicted.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-63cfd80a.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://pct-alternate-fighter-convicted.trycloudflare.com/auth/callback",
+  "https://pct-alternate-fighter-convicted.trycloudflare.com/auth/shopify/callback",
+  "https://pct-alternate-fighter-convicted.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/data_request"
+  compliance_topics = [ "customers/data_request" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/customers/redact"
+  compliance_topics = [ "customers/redact" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/shop/redact"
+  compliance_topics = [ "shop/redact" ]
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "products/update" ]
+  uri = "arn:aws:events:eu-west-3::event-source/aws.partner/shopify.com/165151375361/ShopifyWebhook"
+
+[pos]
+embedded = false
